@@ -1,0 +1,83 @@
+- name: clone gnome extensions source
+  git:
+    repo: "{{ item.url }}"
+    dest: files/gnome_extensions/{{ item.name }}
+    version: "{{ item.version }}"
+  loop: "{{ gnome_extensions_git }}"
+      
+- name: suppress gnome-keyring usage by browsers
+  ini_file:
+    path: "{{ item.0.path }}"
+    option: "{{ item.0.key }}"
+    section: "{{ item.1.section }}"
+    value: "{{ item.0.bin_path }} {{ item.1.cli_flags }}"
+    no_extra_spaces: yes
+  loop: "{{ desktop_files_param | subelements('options') }}"
+  
+- name: compile go helpers
+  shell:
+    cmd: go build -ldflags "-X {{ go_helper_ldflags | join(' -X ') }}" -o bin/{{ item }} {{ item }}.go
+    chdir: files/helper_scripts
+  loop:
+    - x360_touchscreen
+
+- name: copy go helpers
+  copy:
+    src: files/helper_scripts/bin/{{ item }}
+    dest: /usr/bin
+    mode: a+x
+  loop:
+    - x360_touchscreen
+    - auto_rotation_enable.sh
+    - auto_rotation_disable.sh
+    
+- name: copy state db
+  copy: 
+    src: files/helper_scripts/touchscreen_state.json
+    dest: /opt/touchscreen.json
+    
+- name: install gnome extensions
+  copy:
+    src: "{{ item.src }}"
+    dest: /home/{{ desktop_user }}/.local/share/gnome-shell/extensions/{{ item.uri }}/
+  loop: "{{ gnome_extensions_install }}"
+    
+- name: setup argos applet
+  blockinfile:
+    path: /home/{{ desktop_user }}/.config/argos/TWEAKS.0c.1m.sh
+    create: yes
+    block: |
+      #!/usr/bin/env bash
+      echo "+Tweaks"
+      echo "---"
+      echo "Enable Touchscreen | bash=\"sudo x360_touchscreen enable\" terminal=false"
+      echo "Disable Touchscreen | bash=\"sudo x360_touchscreen disable\" terminal=false"
+      echo "Enable Auto-Rotation | bash=\"sudo auto_rotation_enable.sh\" terminal=false"
+      echo "Disable Auto-Rotation | bash=\"sudo auto_rotation_disable.sh\" terminal=false"
+  become: yes
+  become_user: "{{ desktop_user }}"
+  
+- name: setup state restore
+  blockinfile:
+    path: /home/{{ desktop_user }}/.config/autostart/touchscreen_restore_state.desktop
+    create: yes
+    block: |
+      [Desktop Entry]
+      Name=touchscreen_restore_state
+      GenericName=Touchscreen Restore State
+      Comment=Restore state of touchscreen (enable/disable) when logging in
+      Exec=sudo x360_touchscreen restore
+      Terminal=false
+      Type=Application
+      X-GNOME-Autostart-enabled=true
+  become: yes
+  become_user: "{{ desktop_user }}"
+  
+- name: set dconf keys
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value | string }}"
+    state: present
+  become: yes
+  become_user: "{{ desktop_user }}"
+  loop: "{{ dconf_state }}"

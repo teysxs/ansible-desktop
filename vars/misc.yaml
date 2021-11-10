@@ -1,0 +1,46 @@
+ansible_python_interpreter: auto
+desktop_user: yoba.jedi
+
+desktop_files_param:
+  - path: /usr/share/applications/brave-browser.desktop
+    bin_path: /usr/bin/brave-browser-stable
+    key: Exec
+    options: 
+      - section: Desktop Entry
+        cli_flags: --password-store=basic %U
+      - section: Desktop Action new-window
+        cli_flags: --password-store=basic
+      - section: Desktop Action new-private-window
+        cli_flags: --password-store=basic --incognito
+  - path: /usr/share/applications/microsoft-edge-dev.desktop
+    bin_path: /usr/bin/microsoft-edge-dev
+    key: Exec
+    options: 
+      - section: Desktop Entry
+        cli_flags: --password-store=basic %U
+      - section: Desktop Action new-window
+        cli_flags: --password-store=basic
+      - section: Desktop Action new-private-window
+        cli_flags: --password-store=basic --inprivate
+gnome_extensions_git:
+  - name: cpupower
+    url: https://github.com/stefangweichinger/cpupower.git
+    version: gnome41
+  - name: argos
+    url: https://github.com/mwilck/argos.git
+    version: master
+  - name: screenshot
+    url: https://github.com/OttoAllmendinger/gnome-shell-screenshot.git
+    version: master
+  - name: system-monitor
+    url: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
+    version: master
+gnome_extensions_install:
+  - src: gnome_extensions/argos/argos@pew.worldwidemann.com/
+    uri: argos@pew.worldwidemann.com
+  - src: gnome_extensions/cpupower/
+    uri: cpupower@mko-sl.de
+go_helper_ldflags:
+  - main.STATE_JSON=/opt/touchscreen.json
+  - main.DRIVER_PATH=/sys/bus/hid/drivers/hid-multitouch
+grub_cmdline_linux: rhgb quiet usbcore.autosuspend=-1 i8042.reset i8042.dumbkbd i8042.noloop

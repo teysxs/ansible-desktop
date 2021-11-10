@@ -1,0 +1,16 @@
+---
+- name: apply casc
+  hosts: localhost
+  connection: local
+  remote_user: root
+  vars_files:
+    - vars/misc.yaml
+    - vars/system.yaml
+    - vars/dconf.yaml
+  tasks:
+    - name: install apps
+      include_tasks: tasks/apps_install.yaml
+    - name: configure gnome
+      include_tasks: tasks/gnome_config.yaml
+    - name: configure system
+      include_tasks: tasks/system_config.yaml

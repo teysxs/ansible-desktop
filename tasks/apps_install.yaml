@@ -1,0 +1,55 @@
+- name: add rpm keys
+  rpm_key:
+    state: present
+    key: "{{ item }}"
+  loop: "{{ rpm_keys_add }}"
+    
+- name: add rpm repositories
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.desc }}"
+    baseurl: "{{ item.url }}"
+    enabled: yes
+  loop: "{{ rpm_repos_add }}"
+
+- name: add copr repos
+  community.general.copr:
+    host: copr.fedorainfracloud.org
+    state: enabled
+    name: "{{ item }}"
+  loop: "{{ copr_repos_add }}"
+
+- name: enable rpmfusion
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-34.noarch.rpm
+    - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-34.noarch.rpm
+
+- name: install system packages
+  dnf:
+    name: "{{ item }}"
+    update_cache: yes        
+    state: present
+  loop: "{{ dnf_pkg_add }}"
+      
+- name: enable flathub remote
+  flatpak_remote:
+    name: "{{ item.name }}"
+    state: present
+    flatpakrepo_url: "{{ item.url }}"
+    method: user
+  become: yes
+  become_user: "{{ desktop_user }}"
+  loop: "{{ flatpak_remote_add }}"
+    
+- name: install flatpak apps
+  flatpak:
+    name: "{{ item }}"
+    remote: flathub
+    state: present
+    method: user
+  become: yes
+  become_user: "{{ desktop_user }}"
+  loop: "{{ flatpak_pkg_add }}"

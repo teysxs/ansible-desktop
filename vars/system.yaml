@@ -1,0 +1,45 @@
+rpm_keys_add:
+  - https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+  - https://packages.microsoft.com/keys/microsoft.asc
+rpm_repos_add:
+  - name: brave-browser
+    desc: brave browser repository
+    url: https://brave-browser-rpm-release.s3.brave.com/x86_64/
+  - name: microsoft-edge
+    desc: microsoft edge repo
+    url: https://packages.microsoft.com/yumrepos/edge
+copr_repos_add:
+  - principis/howdy
+dnf_pkg_add:
+  - dnf-plugins-core
+  - flatpak
+  - git
+  - golang
+  - libgtop2-devel 
+  - NetworkManager-libnm-devel 
+  - gnome-system-monitor
+  - python3-psutil
+  - brave-browser
+  - microsoft-edge-dev
+  - syncthing
+  - howdy
+  - tilix
+flatpak_remote_add:
+  - name: flathub
+    url: https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak_pkg_add:
+  - com.github.rafostar.Clapper
+  - com.github.tchx84.Flatseal
+  - com.obsproject.Studio
+  - io.github.jliljebl.Flowblade
+  - md.obsidian.Obsidian
+  - org.darktable.Darktable
+  - org.inkscape.Inkscape
+  - org.kde.krita
+  - org.keepassxc.KeePassXC
+  - org.onlyoffice.desktopeditors
+  - org.qbittorrent.qBittorrent
+  - org.telegram.desktop
+  - us.zoom.Zoom
+  - org.kde.kdenlive
+  - org.gnome.Builder

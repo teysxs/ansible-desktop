@@ -1,0 +1,19 @@
+- name: enable passwordless execution of scripts
+  blockinfile:
+    path: /etc/sudoers
+    block: |  
+      ALL ALL=NOPASSWD: /usr/bin/x360_touchscreen
+      ALL ALL=NOPASSWD: /usr/bin/auto_rotation_enable.sh
+      ALL ALL=NOPASSWD: /usr/bin/auto_rotation_disable.sh
+    validate: visudo -cf %s
+
+- name: adjust kernel parameters
+  ini_file:
+    path: /etc/default/grub
+    option: GRUB_CMDLINE_LINUX
+    value: "\"{{ grub_cmdline_linux }}\""
+    no_extra_spaces: yes
+    section: null
+        
+- name: update grub
+  shell: grub2-mkconfig --output=/boot/grub2/grub.cfg
