@@ -1,5 +1,6 @@
 ansible_python_interpreter: auto
 desktop_user: yoba.jedi
+fedora_revision: 34
 
 desktop_files_param:
   - path: /usr/share/applications/brave-browser.desktop
