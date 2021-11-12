@@ -43,3 +43,4 @@ flatpak_pkg_add:
   - us.zoom.Zoom
   - org.kde.kdenlive
   - org.gnome.Builder
+  - org.gnome.Glade

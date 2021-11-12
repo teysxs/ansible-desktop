@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "icon": "applications-science-symbolic",
+    "loglevel": "warning"
+  },
+  "menu": [
+    {
+      "type": "command",
+      "title": "Enable Auto-Rotation",
+      "command": "sudo auto_rotation_enable.sh",
+      "icon": "audio-headset-symbolic"
+    },
+    {
+      "type": "command",
+      "title": "Disable Auto-Rotation",
+      "command": "sudo auto_rotation_disable.sh",
+      "icon": "audio-headset-symbolic"
+    },
+    {
+      "type": "switch",
+      "title": "Touchscreen",
+      "icon": "pda-symbolic",
+      "start": "sudo x360_touchscreen enable",
+      "stop": "sudo x360_touchscreen disable",
+      "check": "sudo x360_touchscreen check"
+    }
+  ]
+}

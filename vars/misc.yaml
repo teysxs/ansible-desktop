@@ -36,12 +36,16 @@ gnome_extensions_git:
   - name: system-monitor
     url: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
     version: master
+  - name: guillotine
+    url: https://github.com/ente76/guillotine.git
+    version: master
 gnome_extensions_install:
-  - src: gnome_extensions/argos/argos@pew.worldwidemann.com/
-    uri: argos@pew.worldwidemann.com
   - src: gnome_extensions/cpupower/
     uri: cpupower@mko-sl.de
+  - src: gnome_extensions/guillotine/
+    uri: guillotine@fopdoodle.net
 go_helper_ldflags:
   - main.STATE_JSON=/opt/touchscreen.json
   - main.DRIVER_PATH=/sys/bus/hid/drivers/hid-multitouch
+  - main.DEVICE_LOOKUP_PATH=/sys/bus/hid/devices
 grub_cmdline_linux: rhgb quiet usbcore.autosuspend=-1 i8042.reset i8042.dumbkbd i8042.noloop

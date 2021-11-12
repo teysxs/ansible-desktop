@@ -18,6 +18,7 @@ type State struct {
 var state_file State
 var STATE_JSON string
 var DRIVER_PATH string
+var DEVICE_LOOKUP_PATH string
 
 func read_json(file string) State {
 	jsonFile, err := os.Open(file)
@@ -41,7 +42,7 @@ func write_json(contents State) {
 }
 
 func update_id(grep string, fallback_id string) string {
-	files, err := ioutil.ReadDir(DRIVER_PATH)
+	files, err := ioutil.ReadDir(DEVICE_LOOKUP_PATH)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -106,5 +107,12 @@ func main() {
 	if op == "enable" {
 		state_file.STATE = "bind"
 		enable(payload, state_file)
+	}
+	if op == "check" {
+		if state_file.STATE == "bind" {
+			os.Exit(0)
+		} else {
+			os.Exit(3)
+		}
 	}
 }

@@ -44,7 +44,7 @@ dconf_state:
   - key: /org/gtk/settings/file-chooser/clock-format
     value: "'24h'"
   - key: /org/gnome/shell/enabled-extensions
-    value: "['system-monitor@paradoxxx.zero.gmail.com', 'cpupower@mko-sl.de', 'appindicatorsupport@rgcjonas.gmail.com', 'gnome-shell-screenshot@ttll.de', 'argos@pew.worldwidemann.com']"
+    value: "['system-monitor@paradoxxx.zero.gmail.com', 'cpupower@mko-sl.de', 'gnome-shell-screenshot@ttll.de', 'guillotine@fopdoodle.net']"
   - key: /com/gexperts/Tilix/enable-wide-handle
     value: "true"
   - key: /com/gexperts/Tilix/terminal-title-show-when-single

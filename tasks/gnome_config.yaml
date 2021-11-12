@@ -41,22 +41,12 @@
     src: "{{ item.src }}"
     dest: /home/{{ desktop_user }}/.local/share/gnome-shell/extensions/{{ item.uri }}/
   loop: "{{ gnome_extensions_install }}"
-    
-- name: setup argos applet
-  blockinfile:
-    path: /home/{{ desktop_user }}/.config/argos/TWEAKS.0c.1m.sh
-    create: yes
-    block: |
-      #!/usr/bin/env bash
-      echo "+Tweaks"
-      echo "---"
-      echo "Enable Touchscreen | bash=\"sudo x360_touchscreen enable\" terminal=false"
-      echo "Disable Touchscreen | bash=\"sudo x360_touchscreen disable\" terminal=false"
-      echo "Enable Auto-Rotation | bash=\"sudo auto_rotation_enable.sh\" terminal=false"
-      echo "Disable Auto-Rotation | bash=\"sudo auto_rotation_disable.sh\" terminal=false"
-  become: yes
-  become_user: "{{ desktop_user }}"
   
+- name: copy guillotine config
+  copy:
+    src: files/config/guillotine.json
+    dest: /home/{{ desktop_user }}/.config/guillotine.json
+
 - name: setup state restore
   blockinfile:
     path: /home/{{ desktop_user }}/.config/autostart/touchscreen_restore_state.desktop
