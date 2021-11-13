@@ -2,13 +2,6 @@
   shell:
     cmd: usermod --shell /usr/bin/fish {{ desktop_user }}
 
-- name: clone oh my fish
-  git:
-    repo: https://github.com/oh-my-fish/oh-my-fish.git
-    depth: 1
-    dest: files/oh-my-fish
-    version: master
-
 - name: configure fish
   copy:
     src: files/config/{{ item }}

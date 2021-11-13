@@ -22,9 +22,6 @@ desktop_files_param:
       - section: Desktop Action new-private-window
         cli_flags: --password-store=basic --inprivate
 gnome_extensions_git:
-  - name: cpupower
-    url: https://github.com/stefangweichinger/cpupower.git
-    version: gnome41
   - name: system-monitor
     url: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
     version: master
@@ -32,8 +29,6 @@ gnome_extensions_git:
     url: https://github.com/ente76/guillotine.git
     version: master
 gnome_extensions_install:
-  - src: gnome_extensions/cpupower/
-    uri: cpupower@mko-sl.de
   - src: gnome_extensions/guillotine/
     uri: guillotine@fopdoodle.net
   - src: gnome_extensions/system-monitor/system-monitor@paradoxxx.zero.gmail.com/
