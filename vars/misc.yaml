@@ -44,6 +44,10 @@ gnome_extensions_install:
     uri: cpupower@mko-sl.de
   - src: gnome_extensions/guillotine/
     uri: guillotine@fopdoodle.net
+  - src: gnome_extensions/screenshot/
+    uri: gnome-shell-screenshot@ttll.de
+  - src: gnome_extensions/system-monitor/
+    uri: system-monitor@paradoxxx.zero.gmail.com
 go_helper_ldflags:
   - main.STATE_JSON=/opt/touchscreen.json
   - main.DRIVER_PATH=/sys/bus/hid/drivers/hid-multitouch

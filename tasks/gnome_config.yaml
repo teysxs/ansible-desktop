@@ -65,9 +65,9 @@
   
 - name: set dconf keys
   dconf:
-    key: "{{ item.key }}"
-    value: "{{ item.value | string }}"
+    key: "{{ item.0.path }}/{{ item.1.key }}"
+    value: "{{ item.1.value | string }}"
     state: present
   become: yes
   become_user: "{{ desktop_user }}"
-  loop: "{{ dconf_state }}"
+  loop: "{{ dconf_state | subelements('keys') }}"

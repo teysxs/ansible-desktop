@@ -1,84 +1,143 @@
 dconf_state:
-  - key: /org/gnome/desktop/input-sources/xkb-options
-    value: "['caps:ctrl_modifier', 'compose:ralt']"
-  - key: /org/gnome/desktop/input-sources/sources
-    value: "[('xkb', 'us'), ('xkb', 'ru'), ('xkb', 'ua')]"
-  - key: /org/gnome/desktop/interface/text-scaling-factor
-    value: "1.19"
-  - key: /org/gnome/desktop/interface/gtk-theme
-    value: "'Adwaita-dark'"
-  - key: /org/gnome/desktop/interface/show-battery-percentage
-    value: "true"
-  - key: /org/gnome/desktop/interface/clock-show-weekday
-    value: "true"
-  - key: /org/gnome/desktop/interface/clock-show-date
-    value: "true"
-  - key: /org/gnome/desktop/session/idle-delay
-    value: "uint32 0"
-  - key: /org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type
-    value: "'nothing'"
-  - key: /org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type
-    value: "'nothing'"
-  - key: /org/gnome/desktop/peripherals/mouse/natural-scroll
-    value: "false"
-  - key: /org/gnome/desktop/peripherals/touchpad/tap-to-click
-    value: "true"
-  - key: /org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled
-    value: "true"
-  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-1
-    value: "['<Alt>1']"
-  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-2
-    value: "['<Alt>2']"
-  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-3
-    value: "['<Alt>3']"
-  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-4
-    value: "['<Alt>4']"
-  - key: /org/gnome/desktop/wm/keybindings/switch-windows
-    value: "['<Alt>Tab']"
-  - key: /org/gnome/desktop/wm/keybindings/switch-applications
-    value: "@as []"
-  - key: /org/gnome/desktop/wm/keybindings/switch-applications-backward
-    value: "@as []"
-  - key: /org/gnome/desktop/interface/clock-format
-    value: "'24h'"
-  - key: /org/gtk/settings/file-chooser/clock-format
-    value: "'24h'"
-  - key: /org/gnome/shell/enabled-extensions
-    value: "['system-monitor@paradoxxx.zero.gmail.com', 'cpupower@mko-sl.de', 'gnome-shell-screenshot@ttll.de', 'guillotine@fopdoodle.net']"
-  - key: /com/gexperts/Tilix/enable-wide-handle
-    value: "true"
-  - key: /com/gexperts/Tilix/terminal-title-show-when-single
-    value: "false"
-  - key: /com/gexperts/Tilix/terminal-title-style
-    value: "'none'"
-  - key: /com/gexperts/Tilix/theme-variant
-    value: "'dark'"
-  - key: /com/gexperts/Tilix/profiles/list
-    value: "['2b7c4080-0ddd-46c5-8f23-563fd3ba789d']"
-  - key: /com/gexperts/Tilix/profiles/default
-    value: "'2b7c4080-0ddd-46c5-8f23-563fd3ba789d'"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/background-color 
-    value: "'#1E1E1E'"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/badge-color-set
-    value: "false"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/bold-color-set 
-    value: "false"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/cursor-colors-set
-    value: "false"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/font 
-    value: "'Source Code Pro Semi-Bold 14'"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/foreground-color
-    value: "'#A7A7A7'"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/highlight-colors-set
-    value: "false"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/login-shell 
-    value: "true"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/palette
-    value: "['#1E1E1E', '#CF6A4C', '#8F9D6A', '#F9EE98', '#7587A6', '#9B859D', '#AFC4DB', '#A7A7A7', '#5F5A60', '#CF6A4C', '#8F9D6A', '#F9EE98', '#7587A6', '#9B859D', '#AFC4DB', '#FFFFFF']"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/use-system-font
-    value: "false"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/use-theme-colors
-    value: "false"
-  - key: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/visible-name 
-    value: "'Default'"
-    
+  - path: /org/gnome/desktop/input-sources
+    keys:
+      - key: xkb-options
+        value: "['caps:ctrl_modifier', 'compose:ralt']"
+      - key: sources
+        value: "[('xkb', 'us'), ('xkb', 'ru'), ('xkb', 'ua')]"
+  - path: /org/gnome/desktop/interface
+    keys:
+      - key: text-scaling-factor
+        value: "1.19"
+      - key: gtk-theme
+        value: "'Adwaita-dark'"
+      - key: show-battery-percentage
+        value: "true"
+      - key: clock-show-weekday
+        value: "true"
+      - key: clock-show-date
+        value: "true"
+  - path: /org/gnome/desktop/session
+    keys:
+      - key: idle-delay
+        value: "unit32 0"
+  - path: /org/gnome/settings-daemon/plugins/power
+    keys:
+      - key: sleep-inactive-ac-type
+        value: "'nothing'"
+      - key: sleep-inactive-battery-type
+        value: "'nothing'"
+  - path: /org/gnome/desktop/peripherals/mouse
+    keys:
+      - key: natural-scroll
+        value: "false"
+  - path: /org/gnome/desktop/peripherals/touchpad
+    keys:
+      - key: tap-to-click
+        value: "true"
+      - key: two-finger-scrolling-enabled
+        value: "true"
+  - path: /org/gnome/desktop/wm/keybindings
+    keys:
+      - key: switch-to-workspace-1
+        value: "['<Alt>1']"
+      - key: switch-to-workspace-2
+        value: "['<Alt>2']"
+      - key: switch-to-workspace-3
+        value: "['<Alt>3']"
+      - key: switch-to-workspace-4
+        value: "['<Alt>4']"
+      - key: switch-windows
+        value: "['<Alt>Tab']"
+      - key: switch-applications
+        value: "@as []"
+      - key: switch-applications-backward
+        value: "@as []"
+  - path: /org/gnome/desktop/interface
+    keys:
+      - key: clock-format
+      - value: "'24h'"
+  - path: /org/gnome/desktop/file-chooser
+    keys:
+      - key: clock-format
+      - value: "'24h'"
+  - path: /org/gnome/shell
+    keys:
+      - key: enabled-extensions
+        value: "['system-monitor@paradoxxx.zero.gmail.com', 'cpupower@mko-sl.de', 'gnome-shell-screenshot@ttll.de', 'guillotine@fopdoodle.net']"
+  - path: /com/gexperts/Tilix
+    keys:
+      - key: enable-wide-handle
+        value: "true"
+      - key: terminal-title-show-when-single
+        value: "false"
+      - key: terminal-title-style
+        value: "'none'"
+      - key: theme-variant
+        value: "'dark'"
+  - path: /com/gexperts/Tilix/profiles
+    keys:
+      - key: list
+        value: "['2b7c4080-0ddd-46c5-8f23-563fd3ba789d']"
+      - key: default
+        value: "'2b7c4080-0ddd-46c5-8f23-563fd3ba789d'"
+  - path: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d
+    keys:
+      - key: background-color
+        value: "'#1E1E1E'"
+      - key: badge-color-set
+        value: "false"
+      - key: bold-color-set
+        value: "false"
+      - key: cursor-colors-set
+        value: "false"
+      - key: font
+        value: "'Source Code Pro Semi-Bold 14'"
+      - key: foreground-color
+        value: "'#A7A7A7'"
+      - key: highlight-colors-set
+        value: "false"
+      - key: login-shell
+        value: "true"
+      - key: palette
+        value: "['#1E1E1E', '#CF6A4C', '#8F9D6A', '#F9EE98', '#7587A6', '#9B859D', '#AFC4DB', '#A7A7A7', '#5F5A60', '#CF6A4C', '#8F9D6A', '#F9EE98', '#7587A6', '#9B859D', '#AFC4DB', '#FFFFFF']"
+      - key: use-system-font
+        value: "false"
+      - key: use-theme-colors
+        value: "false"
+      - key: visible-name
+        value: "'Default'"
+  - path: /org/gnome/shell/extensions/system-monitor
+    keys:
+      - key: background
+        value: "'#ffffff16'"
+      - key: center-display
+        value: "false"
+      - key: compact-display
+        value: "false"
+      - key: cpu-display
+        value: "true"
+      - key: cpu-show-text
+        value: "false"
+      - key: disk-display
+        value: "false"
+      - key: disk-graph-width
+        value: "50"
+      - key: disk-show-menu
+        value: "true"
+      - key: disk-show-text
+        value: "false"
+      - key: disk-usage-style
+        value: "'none'"
+      - key: icon-display
+        value: "false"
+      - key: memory-graph-width
+        value: "50"
+      - key: memory-show-text
+        value: "false"
+      - key: net-graph-width
+        value: "50"
+      - key: net-show-text
+        value: "false"
+      - key: show-tooltip
+        value: "true"
