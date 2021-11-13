@@ -61,6 +61,10 @@ dconf_state:
     keys:
       - key: clock-format
         value: "'24h'"
+  - path: /org/gnome/desktop/media-handling
+    keys:
+      - key: autorun-never
+        value: "true"
   - path: /org/gnome/shell
     keys:
       - key: disabled-extensions
@@ -69,6 +73,10 @@ dconf_state:
         value: "['system-monitor@paradoxxx.zero.gmail.com', 'guillotine@fopdoodle.net']"
       - key: favorite-apps
         value: "['brave-browser.desktop', 'org.qbittorrent.qBittorrent.desktop', 'org.gnome.Builder.desktop', 'md.obsidian.Obsidian.desktop', 'org.telegram.desktop.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Nautilus.desktop', 'com.gexperts.Tilix.desktop']"
+  - path: /org/gnome/shell/app-switcher
+    keys:
+      - key: current-workspace-only
+        value: "true"
   - path: /com/gexperts/Tilix
     keys:
       - key: enable-wide-handle

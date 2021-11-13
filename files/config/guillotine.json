@@ -6,20 +6,8 @@
   "menu": [
     {
       "type": "command",
-      "title": "Screenshot Area",
-      "command": "gnome-screenshot -ap",
-      "icon": "camera-photo-symbolic"
-    },
-    {
-      "type": "command",
-      "title": "Screenshot Window",
-      "command": "gnome-screenshot -w -d 1",
-      "icon": "camera-photo-symbolic"
-    },
-    {
-      "type": "command",
-      "title": "Screenshot Desktop",
-      "command": "gnome-screenshot -p d 1",
+      "title": "Screenshot",
+      "command": "gnome-screenshot -i",
       "icon": "camera-photo-symbolic"
     },
     {
