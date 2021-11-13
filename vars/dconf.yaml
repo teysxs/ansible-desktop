@@ -64,7 +64,7 @@ dconf_state:
   - path: /org/gnome/shell
     keys:
       - key: enabled-extensions
-        value: "['system-monitor@paradoxxx.zero.gmail.com', 'cpupower@mko-sl.de', 'gnome-shell-screenshot@ttll.de', 'guillotine@fopdoodle.net']"
+        value: "['system-monitor@paradoxxx.zero.gmail.com', 'cpupower@mko-sl.de', 'guillotine@fopdoodle.net']"
   - path: /com/gexperts/Tilix
     keys:
       - key: enable-wide-handle
