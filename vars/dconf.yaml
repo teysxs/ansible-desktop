@@ -56,11 +56,11 @@ dconf_state:
   - path: /org/gnome/desktop/interface
     keys:
       - key: clock-format
-      - value: "'24h'"
+        value: "'24h'"
   - path: /org/gnome/desktop/file-chooser
     keys:
       - key: clock-format
-      - value: "'24h'"
+        value: "'24h'"
   - path: /org/gnome/shell
     keys:
       - key: enabled-extensions
