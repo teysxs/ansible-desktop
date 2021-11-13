@@ -5,7 +5,7 @@
   remote_user: root
   vars:
     - desktop_user: yoba.jedi
-    - fedora_revision: 34
+    - fedora_revision: 35
   vars_files:
     - vars/misc.yaml
     - vars/system.yaml
