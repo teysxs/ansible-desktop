@@ -66,7 +66,7 @@ dconf_state:
       - key: disabled-extensions
         value: "['background-logo@fedorahosted.org']"
       - key: enabled-extensions
-        value: "['system-monitor@paradoxxx.zero.gmail.com', 'cpupower@mko-sl.de', 'guillotine@fopdoodle.net']"
+        value: "['system-monitor@paradoxxx.zero.gmail.com', 'guillotine@fopdoodle.net']"
       - key: favorite-apps
         value: "['brave-browser.desktop', 'org.qbittorrent.qBittorrent.desktop', 'org.gnome.Builder.desktop', 'md.obsidian.Obsidian.desktop', 'org.telegram.desktop.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Nautilus.desktop', 'com.gexperts.Tilix.desktop']"
   - path: /com/gexperts/Tilix
