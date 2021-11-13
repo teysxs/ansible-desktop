@@ -1,5 +1,6 @@
 - name: make fish default shell
-    shell: chsh -s /usr/bin/fish
+  shell:
+    cmd: chsh -s /usr/bin/fish
   become: yes
   become_user: "{{ desktop_user }}"
 
