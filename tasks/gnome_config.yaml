@@ -1,6 +1,7 @@
 - name: clone gnome extensions source
   git:
     repo: "{{ item.url }}"
+    depth: 1
     dest: files/gnome_extensions/{{ item.name }}
     version: "{{ item.version }}"
   loop: "{{ gnome_extensions_git }}"

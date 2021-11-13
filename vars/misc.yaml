@@ -27,12 +27,6 @@ gnome_extensions_git:
   - name: cpupower
     url: https://github.com/stefangweichinger/cpupower.git
     version: gnome41
-  - name: argos
-    url: https://github.com/mwilck/argos.git
-    version: master
-  - name: screenshot
-    url: https://github.com/OttoAllmendinger/gnome-shell-screenshot.git
-    version: master
   - name: system-monitor
     url: https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet.git
     version: master
@@ -44,8 +38,6 @@ gnome_extensions_install:
     uri: cpupower@mko-sl.de
   - src: gnome_extensions/guillotine/
     uri: guillotine@fopdoodle.net
-  - src: gnome_extensions/screenshot/
-    uri: gnome-shell-screenshot@ttll.de
   - src: gnome_extensions/system-monitor/
     uri: system-monitor@paradoxxx.zero.gmail.com
 go_helper_ldflags:
