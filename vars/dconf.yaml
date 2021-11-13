@@ -20,7 +20,7 @@ dconf_state:
   - path: /org/gnome/desktop/session
     keys:
       - key: idle-delay
-        value: "unit32 0"
+        value: "'unit32 0'"
   - path: /org/gnome/settings-daemon/plugins/power
     keys:
       - key: sleep-inactive-ac-type
