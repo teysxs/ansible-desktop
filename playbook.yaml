@@ -3,6 +3,9 @@
   hosts: localhost
   connection: local
   remote_user: root
+  vars:
+    - desktop_user: yoba.jedi
+    - fedora_revision: 34
   vars_files:
     - vars/misc.yaml
     - vars/system.yaml
