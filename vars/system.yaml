@@ -12,7 +12,7 @@ copr_repos_add:
   - principis/howdy
 dnf_pkg_add:
   - dnf-plugins-core
-  - util-linux-users
+  - util-linux-user
   - flatpak
   - git
   - golang
