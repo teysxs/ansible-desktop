@@ -25,6 +25,7 @@ dnf_pkg_add:
   - howdy
   - tilix
   - gnome-extensions-app
+  - fish
 flatpak_remote_add:
   - name: flathub
     url: https://dl.flathub.org/repo/flathub.flatpakrepo

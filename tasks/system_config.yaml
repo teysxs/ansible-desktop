@@ -1,3 +1,8 @@
+- name: make fish default shell
+    shell: chsh -s /usr/bin/fish
+  become: yes
+  become_user: "{{ desktop_user }}"
+
 - name: enable passwordless execution of scripts
   blockinfile:
     path: /etc/sudoers
