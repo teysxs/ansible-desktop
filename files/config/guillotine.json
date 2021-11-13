@@ -6,15 +6,33 @@
   "menu": [
     {
       "type": "command",
+      "title": "Screenshot Area",
+      "command": "gnome-screenshot -ap",
+      "icon": "camera-photo-symbolic"
+    },
+    {
+      "type": "command",
+      "title": "Screenshot Window",
+      "command": "gnome-screenshot -w -d 1",
+      "icon": "camera-photo-symbolic"
+    },
+    {
+      "type": "command",
+      "title": "Screenshot Desktop",
+      "command": "gnome-screenshot -p d 1",
+      "icon": "camera-photo-symbolic"
+    },
+    {
+      "type": "command",
       "title": "Enable Auto-Rotation",
       "command": "sudo auto_rotation_enable.sh",
-      "icon": "audio-headset-symbolic"
+      "icon": "view-refresh-symbolic"
     },
     {
       "type": "command",
       "title": "Disable Auto-Rotation",
       "command": "sudo auto_rotation_disable.sh",
-      "icon": "audio-headset-symbolic"
+      "icon": "view-refresh-symbolic"
     },
     {
       "type": "switch",
