@@ -1,8 +1,6 @@
 - name: make fish default shell
   shell:
-    cmd: chsh -s /usr/bin/fish
-  become: yes
-  become_user: "{{ desktop_user }}"
+    cmd: usermod --shell /usr/bin/fish {{ desktop_user }}
 
 - name: enable passwordless execution of scripts
   blockinfile:
