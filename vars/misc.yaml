@@ -28,11 +28,16 @@ gnome_extensions_git:
   - name: guillotine
     url: https://github.com/ente76/guillotine.git
     version: master
+  - name: cpupower
+    url: https://github.com/deinstapel/cpupower.git
+    version: master
 gnome_extensions_install:
   - src: gnome_extensions/guillotine/
     uri: guillotine@fopdoodle.net
   - src: gnome_extensions/system-monitor/system-monitor@paradoxxx.zero.gmail.com/
     uri: system-monitor@paradoxxx.zero.gmail.com
+  - src: gnome_extensions/cpupower/
+    uri: cpupower@mko-sl.de
 go_helper_ldflags:
   - main.STATE_JSON=/opt/touchscreen.json
   - main.DRIVER_PATH=/sys/bus/hid/drivers/hid-multitouch
