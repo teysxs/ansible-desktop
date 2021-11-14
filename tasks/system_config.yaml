@@ -12,6 +12,23 @@
     - fish_greeting.fish
     - fish_prompt.fish
 
+- name: enable services
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - tor
+
+- name: disable services
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  loop:
+    - thermald
+    - power-profiles-daemon
+
 - name: enable passwordless execution of scripts
   blockinfile:
     path: /etc/sudoers
