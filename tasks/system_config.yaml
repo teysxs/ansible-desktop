@@ -24,6 +24,7 @@
   systemd:
     name: "{{ item }}"
     state: stopped
+    masked: yes
     enabled: no
   loop:
     - thermald
