@@ -30,20 +30,24 @@ dnf_pkg_add:
 flatpak_remote_add:
   - name: flathub
     url: https://dl.flathub.org/repo/flathub.flatpakrepo
+  - name: gnome-nightly
+    url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
 flatpak_pkg_add:
-  - com.github.rafostar.Clapper
-  - com.github.tchx84.Flatseal
-  - com.obsproject.Studio
-  - io.github.jliljebl.Flowblade
-  - md.obsidian.Obsidian
-  - org.darktable.Darktable
-  - org.inkscape.Inkscape
-  - org.kde.krita
-  - org.keepassxc.KeePassXC
-  - org.onlyoffice.desktopeditors
-  - org.qbittorrent.qBittorrent
-  - org.telegram.desktop
-  - us.zoom.Zoom
-  - org.kde.kdenlive
-  - org.gnome.Builder
-  - org.gnome.Glade
+  - remote: flathub
+    packages:
+      - com.github.rafostar.Clapper
+      - com.github.tchx84.Flatseal
+      - com.obsproject.Studio
+      - io.github.jliljebl.Flowblade
+      - md.obsidian.Obsidian
+      - org.darktable.Darktable
+      - org.inkscape.Inkscape
+      - org.kde.krita
+      - org.keepassxc.KeePassXC
+      - org.onlyoffice.desktopeditors
+      - org.qbittorrent.qBittorrent
+      - org.telegram.desktop
+      - us.zoom.Zoom
+      - org.kde.kdenlive
+      - org.gnome.Builder
+      - org.gnome.Glade

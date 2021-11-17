@@ -47,10 +47,10 @@
     
 - name: install flatpak apps
   flatpak:
-    name: "{{ item }}"
-    remote: flathub
+    name: "{{ item.1 }}"
+    remote: "{{ item.0.remote }}"
     state: present
     method: user
   become: yes
   become_user: "{{ desktop_user }}"
-  loop: "{{ flatpak_pkg_add }}"
+  loop: "{{ flatpak_pkg_add | subelements('packages') }}"
