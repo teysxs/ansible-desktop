@@ -72,7 +72,7 @@ dconf_state:
       - key: enabled-extensions
         value: "['system-monitor@paradoxxx.zero.gmail.com', 'guillotine@fopdoodle.net', 'cpupower@mko-sl.de']"
       - key: favorite-apps
-        value: "['brave-browser.desktop', 'org.qbittorrent.qBittorrent.desktop', 'org.gnome.Builder.desktop', 'md.obsidian.Obsidian.desktop', 'org.telegram.desktop.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Nautilus.desktop', 'com.gexperts.Tilix.desktop']"
+        value: "['brave-browser.desktop', 'org.qbittorrent.qBittorrent.desktop', 'org.gnome.Builder.desktop', 'md.obsidian.Obsidian.desktop', 'org.telegram.desktop.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.NautilusDevel.desktop', 'com.gexperts.Tilix.desktop']"
   - path: /org/gnome/shell/app-switcher
     keys:
       - key: current-workspace-only

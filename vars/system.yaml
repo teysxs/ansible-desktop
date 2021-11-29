@@ -49,5 +49,12 @@ flatpak_pkg_add:
       - org.telegram.desktop
       - us.zoom.Zoom
       - org.kde.kdenlive
-      - org.gnome.Builder
       - org.gnome.Glade
+      - org.cvfosammmm.Setzer
+  - remote: gnome-nightly
+    packages:
+      - org.gnome.Builder
+      - org.gimp.GIMP
+      - org.gnome.Screenshot
+      - org.gnome.TextEditor.Devel
+      - org.gnome.NautilusDevel
