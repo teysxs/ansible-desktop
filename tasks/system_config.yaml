@@ -19,6 +19,8 @@
     enabled: yes
   loop:
     - tor
+    - thermald
+    - syncthing@yoba.jedi
 
 - name: disable services
   systemd:
@@ -27,7 +29,6 @@
     masked: yes
     enabled: no
   loop:
-    - thermald
     - power-profiles-daemon
 
 - name: enable passwordless execution of scripts

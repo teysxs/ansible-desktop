@@ -31,6 +31,9 @@ gnome_extensions_git:
   - name: cpupower
     url: https://github.com/deinstapel/cpupower.git
     version: master
+  - name: flypie
+    url: https://github.com/Schneegans/Fly-Pie.git
+    version: master
 gnome_extensions_install:
   - src: gnome_extensions/guillotine/
     uri: guillotine@fopdoodle.net
@@ -38,6 +41,8 @@ gnome_extensions_install:
     uri: system-monitor@paradoxxx.zero.gmail.com
   - src: gnome_extensions/cpupower/
     uri: cpupower@mko-sl.de
+  - src: gnome_extensions/flypie/
+    uri: flypie@schneegans.github.com
 go_helper_ldflags:
   - main.STATE_JSON=/opt/touchscreen.json
   - main.DRIVER_PATH=/sys/bus/hid/drivers/hid-multitouch
