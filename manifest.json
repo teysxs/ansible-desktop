@@ -1,0 +1,97 @@
+{
+    "general": {
+        "desktop_user": "yoba.jedi",
+        "distro_release": "35",
+        "rpmfusion": "yes",
+        "update_all": "yes"
+    },
+    "kernel": {
+        "options": [
+            "rhgb",
+            "quiet",
+            "usbcore.autosuspend=-1",
+            "i8042.reset",
+            "i8042.dumbkbd",
+            "i8042.noloop"
+        ]
+    },
+    "system": {
+        "copr_repos": [
+            "+principis/howdy"
+        ],
+        "packages": [
+            "+dnf-plugins-core",
+            "+util-linux-user",
+            "+flatpak",
+            "+git",
+            "+golang",
+            "+libgtop2-devel",
+            "+NetworkManager-libnm-devel",
+            "+gnome-system-monitor",
+            "+python3-psutil",
+            "+syncthing",
+            "+howdy",
+            "+tilix",
+            "+gnome-extensions-app",
+            "+fish",
+            "+foliate"
+        ],
+        "third_party": [
+            {
+                "package": "brave-browser",
+                "key": "https://brave-browser-rpm-release.s3.brave.com/brave-core.asc",
+                "repo": "https://brave-browser-rpm-release.s3.brave.com/x86_64/",
+                "present": "yes"
+            },
+            {
+                "package": "microsoft-edge-dev",
+                "key": "https://packages.microsoft.com/keys/microsoft.asc",
+                "repo": "https://packages.microsoft.com/yumrepos/edge/",
+                "present": "yes"
+            }
+        ],
+        "services": [
+            "+tor",
+            "+thermald"
+        ]
+    },
+    "user": {
+        "flatpak": [
+            {
+                "remote": "flathub",
+                "url": "https://dl.flathub.org/repo/flathub.flatpakrepo",
+                "packages": [
+                    "+com.github.rafostar.Clapper",
+                    "+com.github.tchx84.Flatseal",
+                    "+com.obsproject.Studio",
+                    "+io.github.jliljebl.Flowblade",
+                    "+md.obsidian.Obsidian",
+                    "+org.darktable.Darktable",
+                    "+org.inkscape.Inkscape",
+                    "+org.kde.krita",
+                    "+org.keepassxc.KeePassXC",
+                    "+org.onlyoffice.desktopeditors",
+                    "+org.qbittorrent.qBittorrent",
+                    "+org.telegram.desktop",
+                    "+us.zoom.Zoom",
+                    "+org.kde.kdenlive",
+                    "+org.gnome.Glade",
+                    "+org.cvfosammmm.Setzer",
+                    "+org.gustavoperedo.FontDownloader",
+		    "-com.getferdi.Ferdi"
+                ]
+            },
+            {
+                "remote": "gnome-nightly",
+                "url": "https://nightly.gnome.org/gnome-nightly.flatpakrepo",
+                "packages": [
+                    "+org.gnome.Builder",
+                    "-org.gimp.GIMP",
+                    "+org.gnome.Screenshot",
+                    "+org.gnome.TextEditor.Devel",
+                    "+org.gnome.NautilusDevel"
+                ]
+            }
+        ]
+    }
+}

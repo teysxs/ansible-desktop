@@ -22,15 +22,6 @@
     - thermald
     - syncthing@yoba.jedi
 
-- name: disable services
-  systemd:
-    name: "{{ item }}"
-    state: stopped
-    masked: yes
-    enabled: no
-  loop:
-    - power-profiles-daemon
-
 - name: enable passwordless execution of scripts
   blockinfile:
     path: /etc/sudoers

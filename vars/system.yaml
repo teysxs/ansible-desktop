@@ -52,6 +52,7 @@ flatpak_pkg_add:
       - org.kde.kdenlive
       - org.gnome.Glade
       - org.cvfosammmm.Setzer
+      - org.gustavoperedo.FontDownloader
   - remote: gnome-nightly
     packages:
       - org.gnome.Builder

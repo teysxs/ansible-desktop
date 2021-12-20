@@ -5,15 +5,6 @@
     dest: files/gnome_extensions/{{ item.name }}
     version: "{{ item.version }}"
   loop: "{{ gnome_extensions_git }}"
-      
-- name: suppress gnome-keyring usage by browsers
-  ini_file:
-    path: "{{ item.0.path }}"
-    option: "{{ item.0.key }}"
-    section: "{{ item.1.section }}"
-    value: "{{ item.0.bin_path }} {{ item.1.cli_flags }}"
-    no_extra_spaces: yes
-  loop: "{{ desktop_files_param | subelements('options') }}"
   
 - name: compile go helpers
   shell:

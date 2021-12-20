@@ -70,7 +70,7 @@ dconf_state:
       - key: disabled-extensions
         value: "['background-logo@fedorahosted.org']"
       - key: enabled-extensions
-        value: "['system-monitor@paradoxxx.zero.gmail.com', 'guillotine@fopdoodle.net', 'cpupower@mko-sl.de', 'flypie@schneegans.github.com']"
+        value: "['system-monitor@paradoxxx.zero.gmail.com', 'guillotine@fopdoodle.net', 'flypie@schneegans.github.com']"
       - key: favorite-apps
         value: "['brave-browser.desktop', 'org.qbittorrent.qBittorrent.desktop', 'org.gnome.Builder.desktop', 'md.obsidian.Obsidian.desktop', 'org.telegram.desktop.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.NautilusDevel.desktop', 'com.gexperts.Tilix.desktop']"
   - path: /org/gnome/shell/app-switcher
@@ -152,24 +152,4 @@ dconf_state:
       - key: net-show-text
         value: "false"
       - key: show-tooltip
-        value: "true"
-  - path: /org/gnome/shell/extensions/cpupower
-    keys:
-      - key: cpufreqctl-backend
-        value: "'automatic'"
-      - key: default-ac-profile
-        value: "'2291234155'"
-      - key: default-battery-profile
-        value: "'3060302740'"
-      - key: frequency-sampling-mode
-        value: "'average'"
-      - key: profiles
-        value: "[(8, 10, false, 'Energy Saver', '2817817225'), (8, 30, false, 'Quiet', '3060302740'), (20, 65, true, 'Multimedia', '3686085943'), (8, 100, true, 'High Performance', '2291234155')]"
-      - key: show-arrow-in-taskbar
-        value: "false"
-      - key: show-freq-in-taskbar
-        value: "false"
-      - key: show-icon-in-taskbar
-        value: "true"
-      - key: taskbar-freq-unit-ghz
         value: "true"
