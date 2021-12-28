@@ -1,13 +1,15 @@
 use strict;
 use warnings;
 
-use JSON::Parse;
+use JSON;
 use YAML;
+use Config::INI::Reader;
 use File::Slurp;
 use Data::Dumper;
 
 my $json = read_file('manifest.json');
-my $manifest = JSON::Parse::parse_json($json);
+my $manifest = decode_json($json);
+    my $desktop_user = $manifest->{'general'}->{'desktop_user'};
 
 my @tasks;
 
@@ -147,7 +149,6 @@ sub dnf_extra {
 
 sub flatpak {
     my ($json_path) = @_;
-    my $desktop_user = $manifest->{'general'}->{'desktop_user'};
 
     foreach (@{$json_path}) {
         my @add = @{add_rm($_->{'packages'})->{'add'}};
@@ -284,6 +285,15 @@ sub rpmfusion {
     };
 }
 
+sub dconf {
+    my ($json_path) = @_;
+
+    push @tasks, {
+        'name' => 'import dconf dump',
+        'shell' => sprintf('dconf load / < %s', $json_path)
+    }
+}
+
 copr($manifest->{'system'}->{'copr_repos'});
 dnf($manifest->{'system'}->{'packages'});
 dnf_extra($manifest->{'system'}->{'third_party'});
@@ -292,7 +302,6 @@ dnf_update($manifest->{'general'}->{'update_all'});
 flatpak($manifest->{'user'}->{'flatpak'});
 kernel($manifest->{'kernel'}->{'options'});
 systemd($manifest->{'system'}->{'services'});
-
-# TODO: dconf dump / to json
+dconf($manifest->{'user'}->{'dconf'});
 
 print YAML::Dump(\@data);
