@@ -7,23 +7,13 @@ use Config::INI::Reader;
 use File::Slurp;
 use Data::Dumper;
 
-my $json = read_file('manifest.json');
-my $manifest = decode_json($json);
-    my $desktop_user = $manifest->{'general'}->{'desktop_user'};
+use File::chdir;
+use File::Path;
+use Git::Repository;
+use DateTime;
+use Digest::SHA;
 
-my @tasks;
-
-my @data = {
-    'name' => 'generated playbook',
-    'hosts' => 'localhost',
-    'connection' => 'local',
-    'remote_user' => 'root',
-    'vars' => {
-        'dektop_user' => $manifest->{'general'}->{'desktop_user'},
-        'distro_revision' => $manifest->{'general'}->{'distro_release'}
-    },
-    'tasks' => \@tasks
-};
+my $temp_dir = new Digest::SHA->sha256_hex(time());
 
 sub add_rm {
     my ($path) = @_;
@@ -46,6 +36,7 @@ sub add_rm {
 
 sub copr {
     my ($json_path) = @_;
+    my @tasks;
 
     my @add = @{add_rm($json_path)->{'add'}};
     my @rm = @{add_rm($json_path)->{'rm'}};
@@ -73,10 +64,13 @@ sub copr {
             'loop' => \@rm
         };
     }
+
+    return @tasks;
 }
 
 sub dnf {
     my ($json_path) = @_;
+    my @tasks;
 
     my @add = @{add_rm($json_path)->{'add'}};
     my @rm = @{add_rm($json_path)->{'rm'}};
@@ -104,23 +98,14 @@ sub dnf {
             'loop' => \@rm
         };
     }
-}
 
-sub dnf_update {
-    my ($json_path) = @_;
-    if ($json_path eq 'yes') {
-        push @tasks, {
-            'name' => 'update all dnf packages',
-            'dnf' => {
-                'name' => "*",
-                'state' => 'latest'
-            }
-        }
-    }
+    return @tasks;
 }
 
 sub dnf_extra {
     my ($json_path) = @_;
+    my @tasks;
+
     foreach (@{$json_path}) {
         if ($_->{'key'}) {
             push @tasks, {
@@ -148,10 +133,13 @@ sub dnf_extra {
             dnf([sprintf('-%s', $_->{'package'})]);
         }
     }
+
+    return @tasks;
 }
 
 sub flatpak {
-    my ($json_path) = @_;
+    my ($json_path, $desktop_user) = @_;
+    my @tasks;
 
     foreach (@{$json_path}) {
         my @add = @{add_rm($_->{'packages'})->{'add'}};
@@ -201,10 +189,13 @@ sub flatpak {
             };
         }
     }
+
+    return @tasks;
 }
 
 sub kernel {
     my ($json_path) = @_;
+    my @tasks;
 
     if (@{$json_path}) {
         my $options_line = join(' ', @{$json_path});
@@ -223,10 +214,14 @@ sub kernel {
             'shell' => 'grub2-mkconfig --output=/boot/grub2/grub.cfg'
         };
     }
+
+    return @tasks;
 }
 
 sub systemd {
     my ($json_path) = @_;
+    my @tasks;
+
     my @add = @{add_rm($json_path)->{'add'}};
     my @rm = @{add_rm($json_path)->{'rm'}};
 
@@ -253,10 +248,14 @@ sub systemd {
             'loop' => \@rm
         };
     }
+
+    return @tasks;
 }
 
 sub rpmfusion {
-    my ($json_path) = @_;
+    my ($json_path, $distro_release) = @_;
+    my @tasks;
+
     my $server = 'https://download1.rpmfusion.org';
     my $dnf_state;
 
@@ -269,11 +268,11 @@ sub rpmfusion {
     my @loop = (
         sprintf(
             '%s/free/fedora/rpmfusion-free-release-%s.noarch.rpm',
-            $server, $manifest->{'general'}->{'distro_release'}
+            $server, $distro_release
         ),
         sprintf(
             '%s/nonfree/fedora/rpmfusion-nonfree-release-%s.noarch.rpm',
-            $server, $manifest->{'general'}->{'distro_release'}
+            $server, $distro_release
         )
     );
 
@@ -286,25 +285,67 @@ sub rpmfusion {
         },
         'loop' => \@loop
     };
+
+    return @tasks;
 }
 
 sub dconf {
     my ($json_path) = @_;
+    my @tasks;
 
     push @tasks, {
         'name' => 'import dconf dump',
         'shell' => sprintf('dconf load / < %s', $json_path)
-    }
+    };
+
+    return @tasks;
 }
 
-copr($manifest->{'system'}->{'copr_repos'});
-dnf($manifest->{'system'}->{'packages'});
-dnf_extra($manifest->{'system'}->{'third_party'});
-rpmfusion($manifest->{'general'}->{'rpmfusion'});
-dnf_update($manifest->{'general'}->{'update_all'});
-flatpak($manifest->{'user'}->{'flatpak'});
-kernel($manifest->{'kernel'}->{'options'});
-systemd($manifest->{'system'}->{'services'});
-dconf($manifest->{'user'}->{'dconf'});
+{
+    local $CWD = '/tmp';
+    File::Path->make_path($temp_dir);
+}
 
-print YAML::Dump(\@data);
+{
+    local $CWD = '/tmp';
+    push(@CWD, $temp_dir);
+
+    File::Path->make_path('git');
+    Git::Repository->run(clone => 'git@github.com:teysxs/ansible-desktop.git', 'git');
+
+    push(@CWD, 'git');
+
+    my $json = read_file('manifest.json');
+    my $manifest = decode_json($json);
+    my $desktop_user = $manifest->{'general'}->{'desktop_user'};
+    my $distro_release = $manifest->{'general'}->{'distro_release'};
+
+    my @tasks;
+    my @data = {
+        'name' => 'generated playbook',
+        'hosts' => 'localhost',
+        'connection' => 'local',
+        'remote_user' => 'root',
+        'vars' => {
+            'dektop_user' => $manifest->{'general'}->{'desktop_user'},
+            'distro_revision' => $manifest->{'general'}->{'distro_release'}
+        },
+        'tasks' => \@tasks
+    };
+
+    push(@tasks, copr($manifest->{'system'}->{'copr_repos'}));
+    push(@tasks, dnf($manifest->{'system'}->{'packages'}));
+    push(@tasks, dnf_extra($manifest->{'system'}->{'third_party'}));
+    push(@tasks, rpmfusion($manifest->{'general'}->{'rpmfusion'}, $distro_release));
+    push(@tasks, flatpak($manifest->{'user'}->{'flatpak'}, $desktop_user));
+    push(@tasks, kernel($manifest->{'kernel'}->{'options'}));
+    push(@tasks, systemd($manifest->{'system'}->{'services'}));
+    push(@tasks, dconf($manifest->{'user'}->{'dconf'}));
+
+    print YAML::Dump(\@data);
+}
+
+{
+    local $CWD = '/tmp';
+    File::Path->remove_tree(sprintf('%s/%s', $CWD, $temp_dir));
+}
