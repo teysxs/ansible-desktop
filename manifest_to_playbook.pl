@@ -87,6 +87,7 @@ sub dnf {
             'dnf' => {
                 'name' => "{{ item }}",
                 'update_cache' => 'yes',
+                'disable_gpg_check' => 'yes',
                 'state' => 'present'
             },
             'loop' => \@add
@@ -111,7 +112,7 @@ sub dnf_update {
         push @tasks, {
             'name' => 'update all dnf packages',
             'dnf' => {
-                'name' => "\"*\"",
+                'name' => "*",
                 'state' => 'latest'
             }
         }
@@ -121,13 +122,15 @@ sub dnf_update {
 sub dnf_extra {
     my ($json_path) = @_;
     foreach (@{$json_path}) {
-        push @tasks, {
-            'name' => sprintf('add %s rpm key', $_->{'package'}),
-                'rpm_key' => {
-                'state' => 'present',
-                'key' => $_->{'key'}
-            }
-        };
+        if ($_->{'key'}) {
+            push @tasks, {
+                'name' => sprintf('add %s rpm key', $_->{'package'}),
+                    'rpm_key' => {
+                    'state' => 'present',
+                    'key' => $_->{'key'}
+                }
+            };
+        }
         push @tasks, {
             'name' => sprintf('add %s yum repo', $_->{'package'}),
             'yum_repository' => {

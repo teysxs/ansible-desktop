@@ -12,12 +12,16 @@
             "usbcore.autosuspend=-1",
             "i8042.reset",
             "i8042.dumbkbd",
-            "i8042.noloop"
+            "i8042.noloop",
+            "psi=1"
         ]
     },
     "system": {
         "copr_repos": [
-            "+principis/howdy"
+            "+principis/howdy",
+            "+rmnscnce/kernel-xanmod",
+            "+yanqiyu/waydroid",
+            "+yanqiyu/mutter-bgr"
         ],
         "packages": [
             "+dnf-plugins-core",
@@ -34,7 +38,9 @@
             "+tilix",
             "+gnome-extensions-app",
             "+fish",
-            "+foliate"
+            "+foliate",
+            "+kernel-xanmod-edge",
+            "+waydroid"
         ],
         "third_party": [
             {
@@ -47,6 +53,11 @@
                 "package": "microsoft-edge-dev",
                 "key": "https://packages.microsoft.com/keys/microsoft.asc",
                 "repo": "https://packages.microsoft.com/yumrepos/edge/",
+                "present": "yes"
+            },
+            {
+                "package": "virtio-win",
+                "repo": "https://fedorapeople.org/groups/virt/virtio-win/repo/latest/",
                 "present": "yes"
             }
         ],
