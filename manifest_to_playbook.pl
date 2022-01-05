@@ -13,7 +13,9 @@ use Git::Repository;
 use DateTime;
 use Digest::SHA;
 
+my @tasks;
 my $temp_dir = new Digest::SHA->sha256_hex(time());
+my $git_remote = 'git@github.com:teysxs/ansible-desktop.git';
 
 sub add_rm {
     my ($path) = @_;
@@ -138,7 +140,7 @@ sub dnf_extra {
 }
 
 sub flatpak {
-    my ($json_path, $desktop_user) = @_;
+    my ($json_path) = @_;
     my @tasks;
 
     foreach (@{$json_path}) {
@@ -155,7 +157,7 @@ sub flatpak {
                     'method' => 'user'
                 },
                 'become' => 'yes',
-                'become_user' => $desktop_user
+                'become_user' => '{{ dektop_user }}'
             };
         }
 
@@ -169,7 +171,7 @@ sub flatpak {
                     'method' => 'user'
                 },
                 'become' => 'yes',
-                'become_user' => $desktop_user,
+                'become_user' => '{{ dektop_user }}',
                 'loop' => \@add
             };
         }
@@ -184,7 +186,7 @@ sub flatpak {
                     'method' => 'user'
                 },
                 'become' => 'yes',
-                'become_user' => $desktop_user,
+                'become_user' => '{{ dektop_user }}',
                 'loop' => \@rm
             };
         }
@@ -253,10 +255,10 @@ sub systemd {
 }
 
 sub rpmfusion {
-    my ($json_path, $distro_release) = @_;
+    my ($json_path) = @_;
     my @tasks;
 
-    my $server = 'https://download1.rpmfusion.org';
+    my $server = '';
     my $dnf_state;
 
     if ($json_path eq 'yes') {
@@ -266,14 +268,8 @@ sub rpmfusion {
     }
 
     my @loop = (
-        sprintf(
-            '%s/free/fedora/rpmfusion-free-release-%s.noarch.rpm',
-            $server, $distro_release
-        ),
-        sprintf(
-            '%s/nonfree/fedora/rpmfusion-nonfree-release-%s.noarch.rpm',
-            $server, $distro_release
-        )
+        'https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ distro_release }}.noarch.rpm',
+        'https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ distro_release }}.noarch.rpm'
     );
 
     push @tasks, {
@@ -311,16 +307,13 @@ sub dconf {
     push(@CWD, $temp_dir);
 
     File::Path->make_path('git');
-    Git::Repository->run(clone => 'git@github.com:teysxs/ansible-desktop.git', 'git');
+    Git::Repository->run(clone => $git_remote, 'git');
 
     push(@CWD, 'git');
 
     my $json = read_file('manifest.json');
     my $manifest = decode_json($json);
-    my $desktop_user = $manifest->{'general'}->{'desktop_user'};
-    my $distro_release = $manifest->{'general'}->{'distro_release'};
 
-    my @tasks;
     my @data = {
         'name' => 'generated playbook',
         'hosts' => 'localhost',
@@ -328,7 +321,7 @@ sub dconf {
         'remote_user' => 'root',
         'vars' => {
             'dektop_user' => $manifest->{'general'}->{'desktop_user'},
-            'distro_revision' => $manifest->{'general'}->{'distro_release'}
+            'distro_release' => $manifest->{'general'}->{'distro_release'}
         },
         'tasks' => \@tasks
     };
@@ -336,13 +329,15 @@ sub dconf {
     push(@tasks, copr($manifest->{'system'}->{'copr_repos'}));
     push(@tasks, dnf($manifest->{'system'}->{'packages'}));
     push(@tasks, dnf_extra($manifest->{'system'}->{'third_party'}));
-    push(@tasks, rpmfusion($manifest->{'general'}->{'rpmfusion'}, $distro_release));
-    push(@tasks, flatpak($manifest->{'user'}->{'flatpak'}, $desktop_user));
+    push(@tasks, rpmfusion($manifest->{'general'}->{'rpmfusion'}));
+    push(@tasks, flatpak($manifest->{'user'}->{'flatpak'}));
     push(@tasks, kernel($manifest->{'kernel'}->{'options'}));
     push(@tasks, systemd($manifest->{'system'}->{'services'}));
     push(@tasks, dconf($manifest->{'user'}->{'dconf'}));
 
-    print YAML::Dump(\@data);
+    YAML::DumpFile('playbook.yml', \@data);
+
+    system('sudo ansible-playbook playbook.yml');
 }
 
 {

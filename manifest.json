@@ -27,7 +27,6 @@
             "+dnf-plugins-core",
             "+util-linux-user",
             "+flatpak",
-            "+git",
             "+golang",
             "+libgtop2-devel",
             "+NetworkManager-libnm-devel",
