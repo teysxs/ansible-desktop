@@ -5,7 +5,13 @@ my $deps = [
     'git',
     'ansible',
     'perl-JSON',
-    'perl-YAML'
+    'perl-YAML',
+    'perl-Config-INI',
+    'perl-File-Slurp',
+    'perl-File-chdir',
+    'perl-File-Path',
+    'perl-Git-Repository',
+    'perl-Digest-SHA1'
 ];
 
 system(sprintf('sudo dnf install -y --refresh %s', join(' ', @{$deps} )));
