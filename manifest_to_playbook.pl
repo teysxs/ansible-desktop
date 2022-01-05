@@ -171,7 +171,7 @@ sub flatpak {
                     'method' => 'user'
                 },
                 'become' => 'yes',
-                'become_user' => '{{ dektop_user }}',
+                'become_user' => '{{ desktop_user }}',
                 'loop' => \@add
             };
         }
