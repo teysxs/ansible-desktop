@@ -1,6 +1,17 @@
 use strict;
 use warnings;
 
-system('sudo dnf install -y ansible git');
+my @deps = [
+    'git',
+    'ansible',
+    'perl-JSON'
+];
+
+system(
+    sprintf(
+        'sudo dnf install -y --refresh %s',
+        join(' ', \@deps)
+    )
+);
 
 system('perl manifest_to_playbook.pl');
