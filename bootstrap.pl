@@ -4,7 +4,8 @@ use warnings;
 my $deps = [
     'git',
     'ansible',
-    'perl-JSON'
+    'perl-JSON',
+    'perl-YAML'
 ];
 
 system(sprintf('sudo dnf install -y --refresh %s', join(' ', @{$deps} )));
