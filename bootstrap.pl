@@ -4,6 +4,7 @@ use warnings;
 my $deps = [
     'git',
     'ansible',
+    'ansible-collection-community-general',
     'perl-JSON',
     'perl-YAML',
     'perl-Config-INI',
