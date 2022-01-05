@@ -297,6 +297,35 @@ sub dconf {
     return @tasks;
 }
 
+sub fish {
+    my @tasks;
+
+    my @loop = (
+        'fish_greeting.fish',
+        'fish_prompt.fish'
+    );
+
+    push @tasks, {
+        'name' => 'make fish default shell',
+        'shell' => {
+            'cmd' => 'usermod --shell /usr/bin/fish {{ desktop_user }}'
+        }
+    };
+
+    push @tasks, {
+        'name' => 'configure fish',
+        'copy' => {
+            'src' => 'files/config/{{ item }}',
+            'dest' => '/home/{{ desktop_user }}/.config/fish/functions/{{ item }}'
+        },
+        'become' => 'yes',
+        'become_user' => '{{ desktop_user }}',
+        'loop' => \@loop
+    }
+
+    return @tasks;
+}
+
 {
     local $CWD = '/tmp';
     File::Path->make_path($temp_dir);
@@ -334,6 +363,7 @@ sub dconf {
     push(@tasks, kernel($manifest->{'kernel'}->{'options'}));
     push(@tasks, systemd($manifest->{'system'}->{'services'}));
     push(@tasks, dconf($manifest->{'user'}->{'dconf'}));
+    push(@tasks, fish());
 
     YAML::DumpFile('playbook.yml', \@data);
 
