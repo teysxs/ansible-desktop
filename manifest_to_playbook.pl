@@ -349,7 +349,7 @@ sub fish {
         'connection' => 'local',
         'remote_user' => 'root',
         'vars' => {
-            'dektop_user' => $manifest->{'general'}->{'desktop_user'},
+            'desktop_user' => $manifest->{'general'}->{'desktop_user'},
             'distro_release' => $manifest->{'general'}->{'distro_release'}
         },
         'tasks' => \@tasks
