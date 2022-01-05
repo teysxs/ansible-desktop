@@ -321,7 +321,7 @@ sub fish {
         'become' => 'yes',
         'become_user' => '{{ desktop_user }}',
         'loop' => \@loop
-    }
+    };
 
     return @tasks;
 }
