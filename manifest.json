@@ -89,7 +89,7 @@
                     "+org.gnome.Glade",
                     "+org.cvfosammmm.Setzer",
                     "+org.gustavoperedo.FontDownloader",
-                    "-com.getferdi.Ferdi"
+                    "-com.getferdi.Ferdi",
                     "+org.gnome.Fractal"
                 ]
             },
