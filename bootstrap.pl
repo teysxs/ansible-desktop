@@ -11,7 +11,7 @@ my $deps = [
     'perl-File-chdir',
     'perl-File-Path',
     'perl-Git-Repository',
-    'perl-Digest-SHA1',
+    'perl-Digest-SHA',
     'perl-DateTime'
 ];
 
