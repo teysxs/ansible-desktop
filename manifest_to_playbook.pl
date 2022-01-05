@@ -15,7 +15,7 @@ use Digest::SHA;
 
 my @tasks;
 my $temp_dir = new Digest::SHA->sha256_hex(time());
-my $git_remote = 'git@github.com:teysxs/ansible-desktop.git';
+my $git_remote = 'https://github.com/teysxs/ansible-desktop.git';
 
 sub add_rm {
     my ($path) = @_;
