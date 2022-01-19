@@ -91,7 +91,9 @@
                     "+org.gustavoperedo.FontDownloader",
                     "-com.getferdi.Ferdi",
                     "+org.gnome.Fractal",
-                    "+io.exodus.Exodus"
+                    "+io.exodus.Exodus",
+                    "+io.github.celluloid_player.Celluloid",
+                    "+com.github.flxzt.rnote"
                 ]
             },
             {
